@@ -1,6 +1,6 @@
-# web_mls_admin
+# web-bop
 
-煤链社运营平台
+运营平台
 
 ## Project setup
 
