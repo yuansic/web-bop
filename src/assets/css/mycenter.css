@@ -1,0 +1,20 @@
+@import './common/theme.css';
+
+.welcome-page {
+  .segment.welcome-segment {
+    border: none;
+    .segment-label {
+      width: 80px;
+    }
+  }
+  .user-avatar {
+    width: 100px;
+    height: 100px;
+    /* border-radius: 50%;
+    border: 1px solid #e6e4e4;
+    overflow: hidden; */
+    img {
+      width: 100%;
+    }
+  }
+}

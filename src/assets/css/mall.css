@@ -1,0 +1,21 @@
+.order-pending-detail-page {
+  .comfirm-form {
+    margin-top: 30px;
+    .el-input {
+      width: 300px;
+    }
+  }
+  .receiving-party {
+    .receiving-label {
+      display: inline-block;
+      width: 80px;
+      color: var(--base-gray-color);
+      text-align: right;
+    }
+  }
+}
+.detail-hander-panel {
+  margin-bottom: 20px;
+  padding-left: 0;
+  line-height: 32px;
+}

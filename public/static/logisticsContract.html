@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- 去掉wp点击时高亮效果 -->
+    <!-- 禁用缓存 -->
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-store, must-revalidate" />
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT" />
+    <meta http-equiv="expires" content="0" />
+    <!-- 禁用缓存 -->
+    <title>承运合同签署</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link type="text/css" rel="stylesheet" href="./css/contract.css" />
+  </head>
+
+  <body>
+    <div class="panel_box">
+      <div class="stock_info" style="overflow-y: auto;-webkit-overflow-scrolling:touch">
+        <iframe id="htform" width="100%" height="100%" style="border:none;"></iframe>
+      </div>
+      <div class="stock_sub">
+        <div class="confirm_pan"><input type="button" id="agreeContract" class="confirm_stock" value="同意签署" /></div>
+      </div>
+    </div>
+    <!-- showtip -->
+    <div class="sweet-overlay errlay"></div>
+    <div class="sweet-alert errtip">
+      <h2></h2>
+      <button class="confirm" id="closeTip">确定</button>
+    </div>
+
+    <div class="sweet-overlay yzmlay"></div>
+    <div class="sweet-alert yzcode">
+      <h2>验证码</h2>
+      <div class="yzm_panel">
+        <input type="text" name="" id="yzm_text" value="" placeholder="请输入验证码" />
+        <input type="button" id="get_yzm" value="获取验证码" />
+      </div>
+      <button class="confirm" style="width: 110px;" id="boxSubmit">确定</button>
+      <button class="confirm cancel" style="width: 110px;" id="boxHide">取消</button>
+    </div>
+
+    <div class="progress"><span></span></div>
+    <script type="text/javascript" src="./js/jquery-2.1.0.min.js"></script>
+    <script>
+      $(function() {
+        /* 公共方法定义 */
+        function showtip(content) {
+          $('.errlay,.errtip').show();
+          $('.errtip h2').text(content);
+        }
+
+        function code_time(obj) {
+          var _this = $(obj);
+          if (wait == 0) {
+            _this.attr('disabled', false);
+            _this.val('获取验证码');
+            wait = 60;
+          } else {
+            _this.attr('disabled', true);
+            _this.val('重新发送(' + wait + 's)');
+            wait--;
+            setTimeout(function() {
+              code_time(_this);
+            }, 1000);
+          }
+        }
+
+        function getQueryString(name) {
+          var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+          var r = window.location.search.substr(1).match(reg);
+          if (r != null) return unescape(r[2]);
+          return null;
+        }
+        /* 变量定义 */
+        var urlStr = window.location.host;
+        if (urlStr.indexOf('192.168') != -1 || urlStr.indexOf('127.0.0.1') != -1 || urlStr.indexOf('localhost') != -1) {
+          var baseUrl = 'http://192.168.0.202:9029/trade';
+        } else if (urlStr.indexOf('mlstest.sijibao.com') != -1) {
+          var baseUrl = 'http://mlstest.sijibao.com/trade';
+        } else {
+          var baseUrl = 'http://mls.sijibao.com/trade';
+        }
+
+        var api = {
+          getContract: baseUrl + '/contract/queryContract?querySn=' + getQueryString('protocolOrderSn'), //获取合同信息
+          getCode: baseUrl + '/common/message/send', //发送验证码（发给下单时物流的联系人）
+          signContract: baseUrl + '/contract/carrierSign' //签署合同
+        };
+        var wait = 60;
+        var phone = '';
+        var version = '';
+        var isReload = false;
+
+        /**/
+        var getContract = function() {
+          $.get(api.getContract, function(rtn) {
+            console.log(rtn);
+            if (rtn.status == 0) {
+              document.getElementById('htform').src = rtn.data.contractUrl;
+              phone = rtn.data.carrierPhone;
+              version = rtn.data.version;
+              if (rtn.data.flag) {
+                $('.stock_info').height($(window).height() - 10);
+                $('.stock_sub').hide();
+                showtip('该合同已签署');
+              }
+            } else {
+              showtip(rtn.message || '获取合同信息失败!');
+            }
+          });
+        };
+
+        /* 事件绑定 */
+        //获取验证码
+        $('#get_yzm').click(function() {
+          $.ajax({
+            type: 'POST',
+            url: api.getCode,
+            contentType: 'application/json',
+            data: JSON.stringify({
+              phoneNumber: phone,
+              type: 'CONTRACT'
+            }),
+            dataType: 'json',
+            success: function(rtn) {
+              if (rtn.status == 0) {
+                var obj = document.getElementById('get_yzm');
+                code_time(obj);
+              } else {
+                showtip('发送错误，状态码：' + data.state);
+              }
+            },
+            error: function(data) {
+              showtip('服务器错误');
+            }
+          });
+        });
+        //打开弹窗
+        $('#agreeContract').click(function() {
+          $('.yzmlay,.yzcode').show();
+        });
+        //关闭弹窗
+        $('#boxHide').click(function() {
+          $('.yzmlay,.yzcode').fadeOut(300);
+        });
+        //关闭信息提示
+        $('#closeTip').click(function() {
+          $('.errlay,.errtip').fadeOut(300);
+          if (isReload) {
+            setTimeout(function() {
+              window.location.reload();
+            }, 1000);
+          }
+        });
+        $('#boxSubmit').click(function() {
+          //提交逻辑
+          if (!$('#yzm_text').val()) {
+            showtip('请输入验证码');
+            return;
+          }
+          if (!/^\d{6}$/.test($('#yzm_text').val())) {
+            showtip('验证码必须为6位数字');
+            return;
+          }
+          //隐藏弹窗
+          $('.yzmlay,.yzcode').fadeOut(300);
+          var postdata = {
+            phoneNumber: $('#yzm_text')
+              .val()
+              .trim(),
+            protocolSn: getQueryString('protocolSn'),
+            protocolOrderSn: getQueryString('protocolOrderSn'),
+            version: version,
+            phone: phone
+          };
+
+          $('.progress').show();
+          $.ajax({
+            type: 'POST',
+            url: api.signContract,
+            contentType: 'application/json',
+            data: JSON.stringify(postdata),
+            dataType: 'json',
+            success: function(rtn) {
+              $('.progress').hide();
+              if (rtn.status == 0) {
+                isReload = true;
+                showtip('合同签署成功');
+              } else {
+                showtip(rtn.message || '签署出错，请稍后重试！');
+              }
+            },
+            error: function(data) {
+              $('.progress').hide();
+              showtip('服务器错误');
+            }
+          });
+        });
+
+        /* 应用入口 */
+        var iframeHeight = $(window).height() - 90;
+        $('.stock_info').height(iframeHeight);
+        getContract();
+      });
+    </script>
+  </body>
+</html>

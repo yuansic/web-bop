@@ -1,0 +1,250 @@
+/*企业信息*/
+.company-info-page {
+  padding-left: 20px;
+}
+.myb-detail-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.myb-detail-itemtitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.myb-detail-itemtitle:before {
+  content: ' ';
+  display: inline;
+  background: var(--base-color);
+  padding-left: 3px;
+  margin-right: 15px;
+}
+
+.segment.company-info-segment {
+  border: none;
+  .segment-label {
+    width: 150px;
+  }
+  .segment-area {
+    padding-top: 0;
+    padding-left: 0;
+  }
+  .el-row {
+    padding-left: 0;
+  }
+}
+
+/*价格优惠配置*/
+.discount-price-edit {
+  .discount-form .el-input {
+    width: 160px;
+  }
+  .suffix-unit {
+    line-height: 35px;
+    padding-right: 3px;
+  }
+  .discount-form {
+    .discount-price {
+      margin-left: 120px;
+    }
+    .discount-price:last-child {
+      margin-left: 0;
+    }
+    .del-range-btn {
+      margin: 2px 0 0 10px;
+    }
+  }
+}
+
+/*修改登录密码*/
+.set-login-pwd {
+  .modContent {
+    width: 300px;
+    margin-top: 50px;
+    margin-left: 350px;
+    .next-btn {
+      button {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+    .success-img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+/* 支付安全 */
+
+.security-pwdbox {
+  margin: 50px 0 0 100px;
+}
+
+.modContent {
+  width: 300px;
+  margin-top: 70px;
+  margin-left: 350px;
+}
+
+.modContent button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.modContent .success-img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* 个人中心 */
+.mycenter-box {
+  margin: 50px 0 0 100px;
+  .info-item {
+    font-size: 14px;
+    margin-bottom: 10px;
+    .font-label {
+      margin-right: 5px;
+    }
+  }
+}
+
+/* 常用地址 */
+.el-input.is-disabled.address-textinput .el-input__inner {
+  color: #737373;
+}
+/* 开票信息 */
+.bill-info-page {
+  .el-form {
+    margin: 50px;
+    .el-input {
+      width: 500px;
+    }
+  }
+}
+/* 菜单管理 */
+.menu-tree-table {
+  border: 1px solid #ebeef5;
+  border-bottom: none;
+  color: #606266;
+  .el-tree__empty-block {
+    border-bottom: 1px solid #ebeef5;
+  }
+  .tree-th-header {
+    height: 40px;
+    line-height: 40px;
+    background: #f7f9fb;
+    position: relative;
+    border-bottom: 1px solid #ebeef5;
+    font-size: 12px;
+    .tree-th-name {
+      padding-left: 10px;
+    }
+    .tree-th-content {
+      position: absolute;
+      left: 25%;
+      width: 75%;
+      .el-col {
+        border-left: 1px solid #ebeef5;
+        padding: 0 10px;
+      }
+    }
+  }
+  .el-tree-node__content {
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #ebeef5;
+    padding: 8px 0;
+    box-sizing: border-box;
+    .el-col {
+      border-left: 1px solid #ebeef5;
+      padding: 0 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .custom-tree-node {
+    font-size: 12px;
+    padding-right: 8px;
+    .custom-node-content {
+      position: absolute;
+      left: 25%;
+      width: 75%;
+    }
+  }
+}
+
+/*布局*/
+.layout-set {
+  .setting-pwdbox {
+    margin: 50px 0 0 150px;
+    .pwdtip {
+      margin: 20px 0 30px 30px;
+    }
+  }
+}
+/* 菜单编辑 */
+.menu-form-panel {
+  padding-top: 30px;
+  .el-input__inner {
+    width: 300px;
+  }
+  .el-input__inner.pointer-input {
+    cursor: pointer;
+  }
+}
+.menu-dialog-tree {
+  height: 300px;
+  overflow: auto;
+  margin-top: 30px;
+  background: #f0f0f0;
+  padding: 10px;
+}
+/*角色管理*/
+.role-edit-page {
+  .role-tree {
+    padding: 15px;
+    .el-tree {
+      background: #fbfbfb;
+      padding: 10px;
+    }
+  }
+  .role-tree .el-tree-node__content {
+    height: 32px;
+    line-height: 32px;
+  }
+  .role-form-panel {
+    .el-input__inner {
+      width: 320px;
+    }
+  }
+}
+/* 用户编辑 */
+.user-edit-page {
+  .edit-form {
+    margin: 20px 0 0 0;
+  }
+  .account-item {
+    position: relative;
+    .account-tips {
+      display: inline-block;
+      margin-left: 20px;
+    }
+  }
+
+  .roles-item .el-checkbox {
+    margin-right: 30px;
+    margin-left: 0px;
+  }
+
+  .datapre-redio-group {
+    .el-radio {
+      display: block;
+      line-height: 30px;
+    }
+    .el-radio + .el-radio {
+      margin-left: 0;
+    }
+  }
+}

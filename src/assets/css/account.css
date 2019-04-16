@@ -1,0 +1,119 @@
+/* 资金账户首页开始*/
+.segment .account-statistics .el-row {
+  height: auto;
+  padding: 10px 15px 10px 0;
+  line-height: normal;
+  line-height: none;
+}
+
+.segment .account-statistics .el-row p i {
+  font-size: 20px;
+  font-style: normal;
+  padding-right: 5px;
+}
+
+.segment .account-statistics .el-row .el-col {
+  padding: 20px 5px 20px 45px;
+}
+/* 资金账户首页结束*/
+.account-br {
+  border-right: 1px solid #e2e7ed;
+}
+
+.account-item p {
+  height: 36px;
+  line-height: 36px;
+}
+
+.account-btnpanel {
+  height: 64px;
+  line-height: 64px;
+  background: #ffffff;
+  padding: 0 28px;
+}
+
+/* 付款明细 */
+.pay-header {
+  font-size: 18px;
+  height: 40px;
+  line-height: 40px;
+  margin-top: 15px;
+  margin-left: 12px;
+}
+.preview-grid-btn {
+  padding-left: 215px;
+}
+/* 提现 */
+.withdraw-segment {
+  border: none;
+  .segment-label {
+    width: 100px;
+  }
+}
+
+/* 发票 */
+.bill-apply-dtl .bill-img .el-upload-list {
+  width: 180px;
+  float: right;
+}
+.bill-apply-dtl .bill-img .el-upload-list .el-upload-list__item:first-child {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.bill-form .segment .segment-area {
+  padding: 15px 43px;
+}
+.bill-form .billForm-remove {
+  position: absolute;
+  left: -28px;
+  padding: 4px;
+  margin-top: 3px;
+}
+
+/* 供应商目录 */
+.coalmine-formitem {
+  .el-form-item {
+    margin-bottom: 10px !important;
+  }
+  .el-form-item.is-error {
+    margin-bottom: 22px !important;
+  }
+  .coalMine-address {
+    line-height: 1;
+    margin-top: 10px;
+    padding-left: 5px;
+    color: var(--base-gray-color);
+  }
+}
+.coalmine-select {
+  .el-input__inner {
+    width: 100%;
+  }
+}
+.coalmine-select-popper {
+  .el-select-dropdown__item {
+    height: auto;
+    line-height: 1.5;
+    padding: 5px 20px;
+    .detail-address {
+      color: var(--base-gray-color);
+      font-size: 13px;
+    }
+  }
+}
+.deliveryType-form-item .el-form-item__error {
+  padding-left: 78px;
+}
+.input-with-select {
+  width: 300px;
+  .el-input-group__prepend {
+    background: #ffffff;
+  }
+  .el-select .el-input {
+    width: 60px;
+    .el-input__inner {
+      text-align: center;
+    }
+  }
+}

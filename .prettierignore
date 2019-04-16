@@ -1,0 +1,9 @@
+node_modules
+test
+dist
+.browserslistrc
+.editorconfig
+.env.*
+.eslintignore
+.gitignore
+.prettierignore
